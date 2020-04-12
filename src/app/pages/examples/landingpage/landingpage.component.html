@@ -1,0 +1,182 @@
+<nav
+  class="navbar navbar-expand-lg fixed-top navbar-transparent"
+  color-on-scroll="100"
+  id="navbar-top"
+>
+  <div class="container">
+    <div class="navbar-translate">
+      <a
+        class="navbar-brand"
+        [routerLink]="['/home']"
+      >
+        <span> Universitas </span> Pasundan
+      </a>
+      <button
+        aria-controls="navigation-index"
+        aria-label="Toggle navigation"
+        class="navbar-toggler navbar-toggler"
+        [attr.aria-expanded]="!isCollapsed"
+        (click)="isCollapsed = !isCollapsed"
+        id="navigation"
+        type="button"
+      >
+        <span class="navbar-toggler-bar bar1"> </span>
+        <span class="navbar-toggler-bar bar2"> </span>
+        <span class="navbar-toggler-bar bar3"> </span>
+      </button>
+    </div>
+    <div
+      class="navbar-collapse justify-content-end"
+      [collapse]="isCollapsed"
+      id="navigation"
+    >
+      <div class="navbar-collapse-header">
+        <div class="row">
+          <div class="col-6 collapse-brand"><a> BLK• </a></div>
+          <div class="col-6 collapse-close text-right">
+            <button
+              aria-controls="navigation-index"
+              aria-label="Toggle navigation"
+              class="navbar-toggler"
+              [attr.aria-expanded]="!isCollapsed"
+              (click)="isCollapsed = !isCollapsed"
+              id="navigation"
+              type="button"
+            >
+              <i class="tim-icons icon-simple-remove"> </i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="wrapper">
+  <div class="page-header">
+    <img class="path" src="assets/img/blob.png" />
+
+    <img class="path2" src="assets/img/path2.png" />
+
+    <img class="shapes triangle" src="assets/img/triunghiuri.png" />
+
+    <img class="shapes wave" src="assets/img/waves.png" />
+
+    <img class="shapes squares" src="assets/img/patrat.png" />
+
+    <img class="shapes circle" src="assets/img/cercuri.png" />
+
+    <div class="content-center">
+      <div
+        class="row row-grid justify-content-between align-items-center text-center"
+      >
+        <div class="col-lg-12 col-md-10 pr-md-5">
+          <p-table [columns]="cols" [value]="datas" (onRowSelect)="onRowSelect($event)" selectionMode="single" [(selection)]="selectedMhs">
+            <ng-template pTemplate="caption">
+              List Calon Mahasiswa<br>
+              Klik Kolom Untuk Menerima Mahasiswa Tersebut atau Menolaknya
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th *ngFor="let col of cols" [pSortableColumn]="col.field">
+                  {{col.header}}
+                  <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-mhs>
+              <tr [pSelectableRow]="rowData">
+                <td *ngFor="let col of cols">
+                  {{rowData[col.field]}}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+          <p-dialog header="Pilih Perlakuan :" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
+            <div class="ui-g ui-fluid" *ngIf="mhs">
+                  <button type="button" class="btn btn-success btn-lg btn-icon" (click)="onAccept()">
+                    <i class="tim-icons icon-check-2"></i>
+                  </button>
+                  <button type="button" class="btn btn-danger btn-lg btn-icon" (click)="onReject()">
+                    <i class="tim-icons icon-simple-remove"></i>
+                  </button>
+            </div>
+        </p-dialog>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3"><h1 class="title">BLK•</h1></div>
+        <div class="col-md-3">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/home']"> Home </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/landing']"> Landing </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/register']"> Register </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/profile']"> Profile </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" href="https://creative-tim.com/contact-us?ref=blkdsa-footer">
+                Contact Us
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://creative-tim.com/about-us?ref=blkdsa-footer">
+                About Us
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://creative-tim.com/blog?ref=blkdsa-footer">
+                Blog
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://opensource.org/licenses/MIT">
+                License
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h3 class="title">Follow us:</h3>
+          <div class="btn-wrapper profile">
+            <a
+              class="btn btn-icon btn-neutral btn-round btn-simple mr-1"
+              href="https://twitter.com/creativetim"
+              target="_blank"
+            >
+              <i class="fab fa-twitter"> </i>
+            </a>
+            <a
+              class="btn btn-icon btn-neutral btn-round btn-simple mr-1"
+              href="https://www.facebook.com/creativetim"
+              target="_blank"
+            >
+              <i class="fab fa-facebook-square"> </i>
+            </a>
+            <a
+              class="btn btn-icon btn-neutral btn-round btn-simple"
+              href="https://dribbble.com/creativetim"
+              target="_blank"
+            >
+              <i class="fab fa-dribbble"> </i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
